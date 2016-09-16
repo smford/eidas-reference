@@ -533,7 +533,7 @@ public final class AUCONNECTORSAML implements ICONNECTORSAMLService {
 
             AuthenticationResponse connectorResponse =
                     new AuthenticationResponse.Builder(authnResponse).inResponseTo(serviceProviderRequestSamlId)
-                            .issuer(connectorAuthnRequest.getIssuer())
+                            .issuer(getConnectorResponderMetadataUrl())
                             .build();
 
             return new AuthenticationExchange(storedConnectorRequest, connectorResponse);
