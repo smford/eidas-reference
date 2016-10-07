@@ -15,7 +15,7 @@ fi
 # 2.2.1. Configuring Tomcat 7/Tomcat 8
 # 1. Create a folder named endorsed in $TOMCAT_HOME.
 # 2. Create a folder named shared in $TOMCAT_HOME.
-mkdir -p "$CATALINA_HOME/{endorsed,shared/lib}"
+mkdir -p "$CATALINA_HOME"/{endorsed,shared/lib}
 
 # 3. Edit the file $TOMCAT_HOME\conf\catalina.properties
 # and change the property shared.loader so that it reads:
