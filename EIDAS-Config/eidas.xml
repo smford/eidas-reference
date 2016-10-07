@@ -16,9 +16,9 @@
 	<!-- Id of this Connector -->
 	<entry key="connector.id">CA</entry>
 	<!-- Connector assertion URL -->
-	<entry key="connector.assertion.url">http://eidasnode:8888/EidasNode/ColleagueResponse</entry>
+	<entry key="connector.assertion.url">http://127.0.0.1:8080/EidasNode/ColleagueResponse</entry>
 	<!-- Connector destination URL -->
-	<entry key="connector.destination.url">http://eidasnode:8888/EidasNode/ServiceProvider</entry>
+	<entry key="connector.destination.url">http://127.0.0.1:8080/EidasNode/ServiceProvider</entry>
 	<!--  Default SP attributes needed on the VIdP -->
 	<!-- SP Sector -->
 	<entry key="connector.spSector">DEMO-connector</entry>
@@ -39,18 +39,18 @@
 	<!-- Name of the second Service -->
 	<entry key="service1.name">LOCAL-EIDAS-CA</entry>
 	<!-- URL of the first Service -->
-	<entry key="service1.url">http://eidasnode:8888/EidasNode/ColleagueRequest</entry>	
+	<entry key="service1.url">http://127.0.0.1:8080/EidasNode/ColleagueRequest</entry>	
 	 <!-- Skew time for Service-->
         <entry key="service1.skew">1000</entry>
 	<!-- the url under which  service1 is publishing its metadata -->
-	<entry key="service1.metadata.url">http://eidasnode:8888/EidasNode/ServiceMetadata</entry>	
+	<entry key="service1.metadata.url">http://127.0.0.1:8080/EidasNode/ServiceMetadata</entry>	
 	<entry key="service2.id">CB</entry>
 	<!-- Name of the second Service -->
 	<entry key="service2.name">LOCAL-EIDAS-CB</entry>
 	<!-- URL of the first Service -->
-	<entry key="service2.url">http://eidasnode:8888/EidasNode/ColleagueRequest</entry>	
+	<entry key="service2.url">http://127.0.0.1:8080/EidasNode/ColleagueRequest</entry>	
 	<entry key="service2.skew">1000</entry>
-	<entry key="service2.metadata.url">http://eidasnode:8888/EidasNode/ServiceMetadata</entry>	
+	<entry key="service2.metadata.url">http://127.0.0.1:8080/EidasNode/ServiceMetadata</entry>	
 	<entry key="service3.id">CC</entry>
 	<!-- Name of the second Service -->
 	<entry key="service3.name">LOCAL-EIDAS-CC</entry>
@@ -105,9 +105,9 @@
 	<!-- Present consent-value form? (true/false) -->
 	<entry key="service.askconsent.value">true</entry>
 	<!-- Method to call after IdP -->
-	<entry key="service.specificidpredirect.url">http://eidasnode:8888/EidasNode/IdpResponse</entry>
+	<entry key="service.specificidpredirect.url">http://127.0.0.1:8080/EidasNode/IdpResponse</entry>
 	<!-- Method to call after AP -->
-	<entry key="service.specificapredirect.url">http://eidasnode:8888/EidasNode/APSelector</entry>
+	<entry key="service.specificapredirect.url">http://127.0.0.1:8080/EidasNode/APSelector</entry>
 	<!-- Action of Citizen Consent -->
 	<entry key="service.citizenConsentUrl">CitizenConsent</entry>
 
@@ -211,14 +211,14 @@
         <entry key="metadata.activate">true</entry>
 
         <!--connector Metadata -->
-        <entry key="connector.node.url">http://eidasnode:8888/EidasNode/</entry>
+        <entry key="connector.node.url">http://127.0.0.1:8080/EidasNode/</entry>
         <entry key="connector.contact.email">test@com</entry>
-        <entry key="connector.metadata.url">http://eidasnode:8888/EidasNode/ConnectorMetadata</entry>
+        <entry key="connector.metadata.url">http://127.0.0.1:8080/EidasNode/ConnectorMetadata</entry>
 	
        <!--service Metadata -->
-        <entry key="service.node.url">hhttp://eidasnode:8888/EidasNode/</entry>
+        <entry key="service.node.url">hhttp://127.0.0.1:8080/EidasNode/</entry>
         <entry key="service.contact.email">test@com</entry>
-        <entry key="service.metadata.url">http://eidasnode:8888/EidasNode/ServiceMetadata</entry>
+        <entry key="service.metadata.url">http://127.0.0.1:8080/EidasNode/ServiceMetadata</entry>
  	
 	<entry key="metadata.file.repository">c:\Pgm\projects\configeidas\tomcat\metadata</entry>
 	<entry key="metadata.http.retrieval">true</entry>
@@ -280,9 +280,9 @@
 	-->
 	<entry key="node.metadata.not.signed.descriptors"></entry>
 	<!-- connector metadata url, advertising connector as IdP, for communication with the SP -->
-	<entry key="connector.responder.metadata.url">http://eidasnode:8888/EidasNode/ConnectorResponderMetadata</entry>
+	<entry key="connector.responder.metadata.url">http://127.0.0.1:8080/EidasNode/ConnectorResponderMetadata</entry>
 	<!-- service/Specific metadata url, advertising connector as SP - for communication with the IdP -->
-	<entry key="service.requester.metadata.url">http://eidasnode:8888/EidasNode/ServiceRequesterMetadata</entry>
+	<entry key="service.requester.metadata.url">http://127.0.0.1:8080/EidasNode/ServiceRequesterMetadata</entry>
 
 	<!-- whether the connector supports SPs not able to create SAML requests -->
 	<entry key="eidas.supportFramingSamlRequest">false</entry>

@@ -26,7 +26,7 @@
 
 
     <!--  If not present then no encryption will be applied on response -->
-    <entry key="keyStorePath">c:\Pgm\projects\configEidas\keystore\eidasKeyStore.jks</entry>
+    <entry key="keyStorePath">keystore/eidasKeystore.jks</entry>
     <entry key="responseToPointIssuer.BE">CN=local-demo-cert, OU=DIGIT, O=European Comission, L=Brussels, ST=Belgium,C=BE</entry>
     <entry key="responseToPointSerialNumber.BE">54C8F779</entry>
 

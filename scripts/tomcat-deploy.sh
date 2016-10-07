@@ -44,7 +44,7 @@ cp "$project_root"/AdditionalFiles/endorsed/*.jar "$CATALINA_HOME/shared/lib"
 # ---------------------------
 
 # Build and deploy the SP
-mvn --file "$project_root"/EIDAS-SP clean package -P embedded -P coreDependencies
+mvn --file "$project_root"/EIDAS-SP clean package -P embedded -P coreDependencies -Dmaven.test.skip=true
 cp "$project_root"/EIDAS-SP/target/SP.war "$CATALINA_HOME/webapps"
 
 # ---------------------------
@@ -54,12 +54,11 @@ cp "$project_root"/EIDAS-SP/target/SP.war "$CATALINA_HOME/webapps"
 export EIDAS_CONFIG_REPOSITORY="$project_root"/EIDAS-Config/
 
 # Build and deploy the Node
-mvn --file "$project_root"/EIDAS-Node clean package -P embedded
+mvn --file "$project_root"/EIDAS-Node clean package -P embedded -Dmaven.test.skip=true
 cp "$project_root"/EIDAS-Node/target/EidasNode.war "$CATALINA_HOME/webapps"
 
 # ---------------------------
 # Restart Tomcat
 # ---------------------------
 
-catalina stop
-catalina start
+catalina run
