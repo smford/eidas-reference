@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# ---------------------------
+# Tomcat setup
+# ---------------------------
+
 if hash catalina 2>/dev/null; then
   CATALINA_HOME=$(catalina  | grep CATALINA_HOME | awk '{ print $NF }')
   if [ ! -d "$CATALINA_HOME" ]; then
@@ -29,12 +33,31 @@ rm "$CATALINA_HOME/conf/catalina.properties%"
 
 # Extract from the binary zip file (under AdditionalFiles\endorsed)
 # the following libs to $TOMCAT_HOME\shared\lib:
+
+# TODO: consider making these jar files properly declared dependencies in pom.xml (if they're published to maven central)
 cp AdditionalFiles/endorsed/*.jar "$CATALINA_HOME/shared/lib"
+
+# ---------------------------
+# Deploy the Service Provider
+# ---------------------------
 
 # Build and deploy the SP
 mvn --file EIDAS-SP clean package -P embedded -P coreDependencies
 cp EIDAS-SP/target/SP.war "$CATALINA_HOME/webapps"
 
+# ---------------------------
+# Deploy the Connector Node
+# ---------------------------
+
+export EIDAS_CONFIG_REPOSITORY=./EIDAS-Config/
+
+# Build and deploy the Node
+mvn --file EIDAS-Node clean package -P embedded
+cp EIDAS-Node/target/EidasNode.war "$CATALINA_HOME/webapps"
+
+# ---------------------------
 # Restart Tomcat
+# ---------------------------
+
 catalina stop
 catalina start
