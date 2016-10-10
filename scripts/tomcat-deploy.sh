@@ -61,6 +61,13 @@ export EIDAS_CONFIG_REPOSITORY="$project_root"/EIDAS-Config/
 cp "$project_root"/EIDAS-Node/target/EidasNode.war "$CATALINA_HOME/webapps"
 
 # ---------------------------
+# Deploy the IdP
+# ---------------------------
+
+# Deploy the IdP
+cp "$project_root"/EIDAS-IdP-1.0/target/IdP.war "$CATALINA_HOME/webapps"
+
+# ---------------------------
 # Start Tomcat
 # ---------------------------
 

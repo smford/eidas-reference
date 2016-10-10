@@ -11,4 +11,5 @@ mvn --file EIDAS-Updater                         clean install -Dmaven.test.skip
 mvn --file EIDAS-Specific                        clean install -P embedded -Dmaven.test.skip=true
 mvn --file EIDAS-Node                            clean package -P embedded -Dmaven.test.skip=true
 mvn --file EIDAS-SP                              clean package -P embedded -P coreDependencies -Dmaven.test.skip=true
+mvn --file EIDAS-IdP-1.0                         clean package -P embedded -P coreDependencies -Dmaven.test.skip=true
 
