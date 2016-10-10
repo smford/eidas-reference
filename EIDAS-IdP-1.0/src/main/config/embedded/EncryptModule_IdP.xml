@@ -22,7 +22,7 @@
     <entry key="keyStoreType">JKS</entry>
 
     <!-- Management of the encryption activation -->
-    <entry key="encryptionActivation">c:\PGM\projects\configEidas\encryptionConf.xml</entry>
+    <entry key="encryptionActivation">EIDAS-Config/encryptionConf.xml</entry>
 
 
     <!--  If not present then no encryption will be applied on response -->
