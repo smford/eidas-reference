@@ -42,7 +42,7 @@ cp "$project_root"/AdditionalFiles/endorsed/*.jar "$CATALINA_HOME/shared/lib"
 # ---------------------------
 # Rebuild Everything
 # ---------------------------
-./compile.sh
+mvn --file EIDAS-Parent clean install -P embedded -P coreDependencies -Dmaven.test.skip=true
 
 # ---------------------------
 # Deploy the Service Provider
