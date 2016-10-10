@@ -101,9 +101,9 @@
 	<!-- QAALevel of this Service -->
 	<entry key="service.maxQAAlevel">4</entry>
 	<!-- Present consent-type form? (true/false) -->
-	<entry key="service.askconsent.type">true</entry>
+	<entry key="service.askconsent.type">false</entry>
 	<!-- Present consent-value form? (true/false) -->
-	<entry key="service.askconsent.value">true</entry>
+	<entry key="service.askconsent.value">false</entry>
 	<!-- Method to call after IdP -->
 	<entry key="service.specificidpredirect.url">http://127.0.0.1:8080/EidasNode/IdpResponse</entry>
 	<!-- Method to call after AP -->
