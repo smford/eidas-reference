@@ -40,11 +40,15 @@ rm "$CATALINA_HOME/conf/catalina.properties%"
 cp "$project_root"/AdditionalFiles/endorsed/*.jar "$CATALINA_HOME/shared/lib"
 
 # ---------------------------
+# Rebuild Everything
+# ---------------------------
+./compile.sh
+
+# ---------------------------
 # Deploy the Service Provider
 # ---------------------------
 
-# Build and deploy the SP
-mvn --file "$project_root"/EIDAS-SP clean package -P embedded -P coreDependencies -Dmaven.test.skip=true
+# Deploy the SP
 cp "$project_root"/EIDAS-SP/target/SP.war "$CATALINA_HOME/webapps"
 
 # ---------------------------
@@ -53,12 +57,11 @@ cp "$project_root"/EIDAS-SP/target/SP.war "$CATALINA_HOME/webapps"
 
 export EIDAS_CONFIG_REPOSITORY="$project_root"/EIDAS-Config/
 
-# Build and deploy the Node
-mvn --file "$project_root"/EIDAS-Node clean package -P embedded -Dmaven.test.skip=true
+# Deploy the Node
 cp "$project_root"/EIDAS-Node/target/EidasNode.war "$CATALINA_HOME/webapps"
 
 # ---------------------------
-# Restart Tomcat
+# Start Tomcat
 # ---------------------------
 
 catalina run

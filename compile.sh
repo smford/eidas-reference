@@ -1,35 +1,14 @@
 #!/usr/bin/env bash
 set -e
-cd EIDAS-Parent
-mvn clean install
-cd ..
-cd EIDAS-Light-Commons
-mvn clean install
-cd ..
-cd EIDAS-Commons
-mvn clean install -P embedded
-cd ..
-cd EIDAS-SpecificCommunicationDefinition
-mvn clean install
-cd ..
-cd EIDAS-Encryption
-mvn clean install
-cd ..
-cd EIDAS-ConfigModule
-mvn clean install
-cd ..
-cd EIDAS-SAMLEngine
-mvn clean install
-cd ..
-cd EIDAS-Updater
-mvn clean install
-cd ..
-cd EIDAS-Specific
-mvn clean install -P embedded
-cd ..
-cd EIDAS-Node
-mvn clean package -P embedded
-cd ..
-cd EIDAS-SP
-mvn clean package -P embedded -P coreDependencies
-cd ..
+mvn --file EIDAS-Parent                          clean install -Dmaven.test.skip=true
+mvn --file EIDAS-Light-Commons                   clean install -Dmaven.test.skip=true
+mvn --file EIDAS-Commons                         clean install -P embedded -Dmaven.test.skip=true
+mvn --file EIDAS-SpecificCommunicationDefinition clean install -Dmaven.test.skip=true
+mvn --file EIDAS-Encryption                      clean install -Dmaven.test.skip=true
+mvn --file EIDAS-ConfigModule                    clean install -Dmaven.test.skip=true
+mvn --file EIDAS-SAMLEngine                      clean install -Dmaven.test.skip=true
+mvn --file EIDAS-Updater                         clean install -Dmaven.test.skip=true
+mvn --file EIDAS-Specific                        clean install -P embedded -Dmaven.test.skip=true
+mvn --file EIDAS-Node                            clean package -P embedded -Dmaven.test.skip=true
+mvn --file EIDAS-SP                              clean package -P embedded -P coreDependencies -Dmaven.test.skip=true
+
