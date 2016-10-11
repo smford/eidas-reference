@@ -492,8 +492,20 @@ public final class DOMConfigurator {
         if (StringUtils.isNotBlank(fileConfiguration)) {
             final SingletonAccessor<T> accessor =
                     ExternalConfigurationFileAccessor.newAccessor(instanceName, configurationKey.getKey(),
-                                                                  fileConfiguration.trim(), staticParameters,
-                                                                  overrideParameters, new EnvironmentBasedMapConverter<T>());
+                            fileConfiguration.trim(), staticParameters,
+                            overrideParameters, new MapConverter<T>() {
+
+                                @Override
+                                public T convert(Map<String, String> map) {
+                                    try {
+                                        return constructor.newInstance(map);
+                                    } catch (InvocationTargetException ite) {
+                                        throw new IllegalStateException(ite.getTargetException());
+                                    } catch (Exception e) {
+                                        throw new IllegalStateException(e);
+                                    }
+                                }
+                            });
             return newProxyInstance(contextClassLoader, type, constructor.getDeclaringClass(), accessor);
         } else {
             Map<String, String> allParameters = new LinkedHashMap<>();
