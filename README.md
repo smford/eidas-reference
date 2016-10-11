@@ -1,4 +1,4 @@
-# eidas-reference
+# eidas-reference [![Build Status](https://travis-ci.org/alphagov/eidas-reference.svg?branch=master)](https://travis-ci.org/alphagov/eidas-reference)
 
 This repository contains a fork of the eIDAS reference implementation provided by CEF digital.
 The original code can be obtained [here](https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/eIDAS-Node).
@@ -38,8 +38,6 @@ The advisable tomcat downoad is the zipped one and not tomcat windows service.*
 ./scripts/tomcat-deploy.sh
 
 # Windows
-=======
-# If you're on windows
 .\scripts\tomcat-deploy.ps1
 ```
 
