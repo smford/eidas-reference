@@ -29,13 +29,17 @@ From the `EIDAS-Parent` folder run `mvn test`.
 
 *Note (windows): the scripts for windows use [Powershell](https://msdn.microsoft.com/en-us/powershell/mt173057.aspx).
 If you haven't used Powershell before you'll need to [set your execution policy](https://technet.microsoft.com/en-us/library/hh849812.aspx)
-to allow it to run unsigned scripts (from powershell run `Set-ExecutionPolicy Unrestricted`).*
+to allow it to run unsigned scripts (from powershell run `Set-ExecutionPolicy Unrestricted`).
+You also need to set CATALINA_HOME in Windows System Environment Variables - this should be your Tomcat root directory. 
+The advisable tomcat downoad is the zipped one and not tomcat windows service.*
 
 ```
 # Linux or OS X
 ./scripts/tomcat-deploy.sh
 
 # Windows
+=======
+# If you're on windows
 .\scripts\tomcat-deploy.ps1
 ```
 
