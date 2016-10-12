@@ -17,7 +17,7 @@
     <!-- Key Encryption algorithm -->
     <entry key="key.encryption.algorithm">http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p</entry>
 
-    <entry key="keyStorePath">keystore/eidasKeystore.jks</entry>
+    <entry key="keyStorePath">${EIDAS_KEYSTORE}</entry>
     <entry key="keyStorePassword">local-demo</entry>
     <entry key="keyPassword">local-demo</entry>
 
