@@ -31,13 +31,23 @@ if(!(Test-Path -Path shared/lib )){
 # the following libs to $TOMCAT_HOME\shared\lib:
 # TODO: consider making these jar files properly declared dependencies in pom.xml (if they're published to maven central)
 
-Copy-Item ../AdditionalFiles/endorsed/*.jar "$env:CATALINA_HOME/shared/lib"
+Copy-Item $project_root/AdditionalFiles/endorsed/*.jar "$env:CATALINA_HOME/shared/lib"
 
 
 # ---------------------------
 # Rebuild Everything
 # ---------------------------
 mvn clean install -file "$project_root/EIDAS-Parent" -P embedded -P coreDependencies -D maven.test.skip=true
+
+#Stop Tomcat
+Invoke-Expression "$env:CATALINA_HOME\bin\shutdown.bat"
+
+#Clean out tomcat deployment directory
+Remove-Item $env:CATALINA_HOME\webapps\*.war
+Remove-Item $env:CATALINA_HOME\webapps\SP -Recurse
+Remove-Item $env:CATALINA_HOME\webapps\EidasNode -Recurse
+Remove-Item $env:CATALINA_HOME\webapps\IdP -Recurse
+
 
 # ---------------------------
 # Deploy the Service Provider
@@ -66,6 +76,8 @@ Copy-Item "$project_root/EIDAS-IdP-1.0/target/IdP.war" "$env:CATALINA_HOME\webap
 # Start Tomcat
 # ---------------------------
 
-# Restart Tomcat
-Invoke-Expression "$env:CATALINA_HOME\bin\shutdown.bat"
+# Temporarily setting env variable for local tomcat running in windows
+$env:EIDAS_KEYSTORE="keystore/eidasKeystore.jks"
+
+# Start Tomcat
 Invoke-Expression "$env:CATALINA_HOME\bin\startup.bat"

@@ -1,27 +1,7 @@
 package eu.eidas.auth.engine.configuration.dom;
 
-import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import eu.eidas.auth.commons.EidasErrorKey;
 import eu.eidas.auth.commons.EidasErrors;
 import eu.eidas.auth.commons.attribute.AttributeRegistries;
@@ -35,18 +15,24 @@ import eu.eidas.auth.engine.SamlEngineSystemClock;
 import eu.eidas.auth.engine.configuration.ProtocolEngineConfiguration;
 import eu.eidas.auth.engine.configuration.SamlEngineConfiguration;
 import eu.eidas.auth.engine.configuration.SamlEngineConfigurationException;
-import eu.eidas.auth.engine.core.DefaultCoreProperties;
-import eu.eidas.auth.engine.core.ExtensionProcessorI;
-import eu.eidas.auth.engine.core.ProtocolCipherI;
-import eu.eidas.auth.engine.core.ProtocolProcessorI;
-import eu.eidas.auth.engine.core.ProtocolSignerI;
-import eu.eidas.auth.engine.core.SamlEngineCoreProperties;
-import eu.eidas.auth.engine.core.SamlEngineEncryptionI;
+import eu.eidas.auth.engine.core.*;
 import eu.eidas.auth.engine.core.eidas.EidasExtensionProcessor;
 import eu.eidas.auth.engine.core.eidas.EidasProtocolProcessor;
 import eu.eidas.auth.engine.metadata.MetadataFetcherI;
 import eu.eidas.auth.engine.metadata.MetadataSignerI;
 import eu.eidas.util.Preconditions;
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.*;
 
 /**
  * Creates typed configuration objects (BaseConfigurations) based on parsing results (InstanceMap).
@@ -489,6 +475,7 @@ public final class DOMConfigurator {
             throws IllegalAccessException, InvocationTargetException, InstantiationException {
         String fileConfiguration = configurationEntry.get(ParameterKey.FILE_CONFIGURATION);
         ImmutableMap<String, String> staticParameters = configurationEntry.getParameters();
+        final EnvironmentVariableSubstitutor environmentVariableSubstitutor = new EnvironmentVariableSubstitutor();
         if (StringUtils.isNotBlank(fileConfiguration)) {
             final SingletonAccessor<T> accessor =
                     ExternalConfigurationFileAccessor.newAccessor(instanceName, configurationKey.getKey(),
@@ -498,7 +485,8 @@ public final class DOMConfigurator {
                                 @Override
                                 public T convert(Map<String, String> map) {
                                     try {
-                                        return constructor.newInstance(map);
+
+                                        return constructor.newInstance(environmentVariableSubstitutor.replaceValues(map));
                                     } catch (InvocationTargetException ite) {
                                         throw new IllegalStateException(ite.getTargetException());
                                     } catch (Exception e) {
@@ -511,7 +499,7 @@ public final class DOMConfigurator {
             Map<String, String> allParameters = new LinkedHashMap<>();
             allParameters.putAll(staticParameters);
             allParameters.putAll(overrideParameters);
-            return constructor.newInstance(ImmutableMap.copyOf(allParameters));
+            return constructor.newInstance(ImmutableMap.copyOf(environmentVariableSubstitutor.replaceValues(allParameters)));
         }
     }
 
