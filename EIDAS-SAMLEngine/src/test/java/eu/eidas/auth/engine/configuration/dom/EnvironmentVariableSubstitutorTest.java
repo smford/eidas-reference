@@ -1,5 +1,7 @@
 package eu.eidas.auth.engine.configuration.dom;
 
+import eu.eidas.config.impl.EnvironmentVariableSubstitutor;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -16,7 +18,8 @@ public class EnvironmentVariableSubstitutorTest {
     public static final String KEY = "key";
     EnvironmentVariableSubstitutor target;
 
-    public EnvironmentVariableSubstitutorTest() {
+    @Before
+    public void setup() {
         Map<String, String> envVariables = new HashMap<>();
         envVariables.put(ENVIRONMENT_VARIABLE1, ACTUAL_PATH1);
         envVariables.put(ENVIRONMENT_VARIABLE2, ACTUAL_PATH2);

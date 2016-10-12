@@ -1,4 +1,4 @@
-package eu.eidas.auth.engine.configuration.dom;
+package eu.eidas.config.impl;
 
 import org.apache.commons.lang.text.StrLookup;
 

@@ -20,6 +20,7 @@ import eu.eidas.auth.engine.core.eidas.EidasExtensionProcessor;
 import eu.eidas.auth.engine.core.eidas.EidasProtocolProcessor;
 import eu.eidas.auth.engine.metadata.MetadataFetcherI;
 import eu.eidas.auth.engine.metadata.MetadataSignerI;
+import eu.eidas.config.impl.EnvironmentVariableSubstitutor;
 import eu.eidas.util.Preconditions;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;

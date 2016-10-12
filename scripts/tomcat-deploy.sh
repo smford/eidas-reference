@@ -67,6 +67,9 @@ cp "$project_root"/EIDAS-Node/target/EidasNode.war "$CATALINA_HOME/webapps"
 # Deploy the IdP
 cp "$project_root"/EIDAS-IdP-1.0/target/IdP.war "$CATALINA_HOME/webapps"
 
+export EIDAS_KEYSTORE='keystore/eidasKeystore.jks'
+export EIDAS_HOST='http://127.0.0.1:8080'
+
 # ---------------------------
 # Start Tomcat
 # ---------------------------

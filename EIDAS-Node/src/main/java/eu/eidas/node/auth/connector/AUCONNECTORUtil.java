@@ -272,7 +272,7 @@ public final class AUCONNECTORUtil extends AUNODEUtil {
      * @see Properties
      */
     public void setConfigs(final Properties confs) {
-        this.configs = confs;
+        this.configs = substituteEnvironmentVariables(confs);
     }
 
     /**

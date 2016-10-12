@@ -3,6 +3,7 @@ package eu.eidas.node.auth.service;
 import java.util.Properties;
 
 import eu.eidas.auth.commons.cache.ConcurrentMapService;
+import eu.eidas.config.impl.EnvironmentVariableSubstitutor;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,7 @@ public class AUSERVICEUtil extends AUNODEUtil {
      * @see Properties
      */
     public void setConfigs(final Properties confs) {
-        this.configs = confs;
+        this.configs = substituteEnvironmentVariables(confs);
     }
 
     /**

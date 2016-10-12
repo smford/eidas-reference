@@ -2,6 +2,7 @@ package eu.eidas.node.auth;
 
 import eu.eidas.auth.commons.EIDASValues;
 import eu.eidas.auth.commons.cache.ConcurrentMapService;
+import eu.eidas.config.impl.EnvironmentVariableSubstitutor;
 import eu.eidas.engine.exceptions.EIDASSAMLEngineRuntimeException;
 import eu.eidas.node.logging.LoggingMarkerMDC;
 
@@ -43,6 +44,16 @@ public abstract class AUNODEUtil {
             antiReplayCache.clear();
         }
     }
+
+    /**
+     * Setter for configs.
+     * @param properties The configs to set.
+     * @see Properties
+     */
+    public Properties substituteEnvironmentVariables(final Properties properties) {
+        return new EnvironmentVariableSubstitutor().replaceValues(properties);
+    }
+
 
     /**
      * Method used to check if the saml request has not already been processed (replay attack)
