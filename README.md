@@ -41,6 +41,14 @@ The advisable tomcat downoad is the zipped one and not tomcat windows service.*
 .\scripts\tomcat-deploy.ps1
 ```
 
+#### Where to find the applications
+
+By default tomcat will run on port 8080, so if all has gone well the applications will be reachable at:
+
+Stub Service Provider - [http://localhost:8080/SP](http://localhost:8080/SP)
+eIDAS Node - [http://localhost:8080/EidasNode](http://localhost:8080/EidasNode)
+Stub Identity Provider - [http://localhost:8080/IdP](http://localhost:8080/IdP)
+
 ### Editing the code
 
 You can import the code into your IDE of choice by pointing it at the pom.xml in EIDAS-Parent.
