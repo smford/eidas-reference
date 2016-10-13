@@ -18,6 +18,8 @@ import java.util.concurrent.ConcurrentMap;
 public abstract class AUNODEUtil {
 
     private ConcurrentMapService concurrentMapService;
+    private EnvironmentVariableSubstitutor environmentVariableSubstitutor = new EnvironmentVariableSubstitutor();
+
     public abstract Properties getConfigs() ;
 
     /**
@@ -45,13 +47,9 @@ public abstract class AUNODEUtil {
         }
     }
 
-    /**
-     * Setter for configs.
-     * @param properties The configs to set.
-     * @see Properties
-     */
-    public Properties substituteEnvironmentVariables(final Properties properties) {
-        return new EnvironmentVariableSubstitutor().replaceValues(properties);
+    protected Properties substituteEnvironmentVariables(final Properties properties) {
+        environmentVariableSubstitutor.mutatePropertiesReplaceValues(properties);
+        return properties;
     }
 
 
