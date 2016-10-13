@@ -17,11 +17,12 @@ public class EnvironmentVariableSubstitutor extends StrSubstitutor {
         this.setEnableSubstitutionInVariables(false);
     }
 
-    public void mutatePropertiesReplaceValues(Properties properties) {
-        for (Object key : properties.keySet()) {
+    public Properties mutatePropertiesReplaceValues(Properties properties) {
+       for (Object key : properties.keySet()) {
             String keyString = (String)key;
             properties.setProperty(keyString, this.replace(properties.getProperty(keyString)));
         }
+        return properties;
     }
 
     public <T> Map<T, String> replaceValues(Map<T, String> map) {

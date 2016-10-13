@@ -1,31 +1,9 @@
 package eu.eidas.idp;
 
-import java.nio.charset.Charset;
-import java.nio.charset.CharsetEncoder;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.google.common.collect.ImmutableSet;
 import com.ibm.icu.text.Transliterator;
-
-import org.apache.log4j.Logger;
-
-import eu.eidas.auth.commons.EIDASStatusCode;
-import eu.eidas.auth.commons.EIDASSubStatusCode;
-import eu.eidas.auth.commons.EIDASUtil;
-import eu.eidas.auth.commons.EidasErrorKey;
-import eu.eidas.auth.commons.EidasErrors;
-import eu.eidas.auth.commons.EidasParameterKeys;
-import eu.eidas.auth.commons.EidasStringUtil;
-import eu.eidas.auth.commons.attribute.AttributeDefinition;
-import eu.eidas.auth.commons.attribute.AttributeValue;
-import eu.eidas.auth.commons.attribute.AttributeValueMarshaller;
-import eu.eidas.auth.commons.attribute.AttributeValueMarshallingException;
-import eu.eidas.auth.commons.attribute.ImmutableAttributeMap;
+import eu.eidas.auth.commons.*;
+import eu.eidas.auth.commons.attribute.*;
 import eu.eidas.auth.commons.exceptions.InternalErrorEIDASException;
 import eu.eidas.auth.commons.exceptions.InvalidParameterEIDASException;
 import eu.eidas.auth.commons.exceptions.SecurityEIDASException;
@@ -39,7 +17,17 @@ import eu.eidas.auth.engine.ProtocolEngineI;
 import eu.eidas.auth.engine.metadata.MetadataSignerI;
 import eu.eidas.auth.engine.metadata.MetadataUtil;
 import eu.eidas.auth.engine.xml.opensaml.SAMLEngineUtils;
+import eu.eidas.config.impl.EnvironmentVariableSubstitutor;
 import eu.eidas.engine.exceptions.EIDASSAMLEngineException;
+import org.apache.log4j.Logger;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetEncoder;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 
 public class ProcessLogin {
 
@@ -59,7 +47,7 @@ public class ProcessLogin {
 
     private String eidasLoa;
 
-    private Properties idpProperties = EIDASUtil.loadConfigs(Constants.IDP_PROPERTIES);
+    private Properties idpProperties = new EnvironmentVariableSubstitutor().mutatePropertiesReplaceValues(EIDASUtil.loadConfigs(Constants.IDP_PROPERTIES));
 
     private final IdpMetadataFetcher idpMetadataFetcher = new IdpMetadataFetcher();
 
