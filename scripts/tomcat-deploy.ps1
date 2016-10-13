@@ -79,8 +79,8 @@ Copy-Item "$project_root/EIDAS-IdP-1.0/target/IdP.war" "$env:CATALINA_HOME\webap
 # Temporarily setting env variable for local tomcat running in windows
 $env:EIDAS_KEYSTORE="keystore/eidasKeystore.jks"
 $env:EIDAS_HOST="http://127.0.0.1:8080"
-$env:IDP_URL="http://localhost:8080"
-$env:IDP_SSO_URL="https://localhost:8080"
+$env:IDP_URL="http://127.0.0.1:8080"
+$env:IDP_SSO_URL="https://127.0.0.1:8080"
 
 # Start Tomcat
 Invoke-Expression "$env:CATALINA_HOME\bin\startup.bat"
