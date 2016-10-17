@@ -4,6 +4,7 @@ applications:
   buildpack: java_buildpack
 
 env:
+  EIDAS_CONFIG_REPOSITORY: WEB-INF/
   EIDAS_KEYSTORE: keystore/eidasKeystore.jks
   EIDAS_HOST: http://127.0.0.1:8080
   IDP_URL: http://127.0.0.1:8080

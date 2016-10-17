@@ -503,6 +503,12 @@
                                     <include>**/web.xml</include>
                                 </includes>
                             </resource>
+                            <resource>
+                              <directory>${project.basedir}/../EIDAS-Config</directory>
+                              <includes>
+                                <include>*</include>
+                              </includes>
+                            </resource>
                         </webResources>
                     </configuration>
                 </plugin>
