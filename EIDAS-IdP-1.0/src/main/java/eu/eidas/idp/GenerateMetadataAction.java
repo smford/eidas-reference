@@ -22,31 +22,29 @@
 
 package eu.eidas.idp;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.Properties;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
-
-import eu.eidas.auth.commons.EidasErrorKey;
-import org.apache.struts2.interceptor.ServletRequestAware;
-import org.apache.struts2.interceptor.ServletResponseAware;
-import org.opensaml.common.xml.SAMLConstants;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import eu.eidas.auth.commons.EIDASUtil;
+import eu.eidas.auth.commons.EidasErrorKey;
 import eu.eidas.auth.commons.EidasStringUtil;
 import eu.eidas.auth.commons.exceptions.EIDASServiceException;
 import eu.eidas.auth.engine.ProtocolEngineFactory;
 import eu.eidas.auth.engine.ProtocolEngineI;
 import eu.eidas.auth.engine.metadata.MetadataConfigParams;
 import eu.eidas.auth.engine.metadata.MetadataGenerator;
+import eu.eidas.config.impl.EnvironmentVariableSubstitutor;
 import eu.eidas.engine.exceptions.EIDASSAMLEngineException;
+import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.ServletResponseAware;
+import org.opensaml.common.xml.SAMLConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.Properties;
 
 /**
  * This Action returns an xml containing IDP metadata
@@ -61,7 +59,7 @@ public class GenerateMetadataAction extends ActionSupport implements ServletRequ
 
         private static final String INVALID_METADATA = "invalid metadata";
         private static final String ERROR_GENERATING_METADATA = "error generating metadata {}";
-        Properties configs = EIDASUtil.loadConfigs(Constants.IDP_PROPERTIES);
+        Properties configs = new EnvironmentVariableSubstitutor().mutatePropertiesReplaceValues(EIDASUtil.loadConfigs(Constants.IDP_PROPERTIES));
 
         public String generateMetadata(){
 		String metadata=INVALID_METADATA;

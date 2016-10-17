@@ -1,15 +1,14 @@
 package eu.eidas.idp;
 
-import java.util.Properties;
-
-import javax.annotation.Nonnull;
-
-import org.opensaml.saml2.metadata.EntityDescriptor;
-
 import eu.eidas.auth.commons.EIDASUtil;
 import eu.eidas.auth.engine.metadata.MetadataSignerI;
 import eu.eidas.auth.engine.metadata.impl.DefaultMetadataFetcher;
+import eu.eidas.config.impl.EnvironmentVariableSubstitutor;
 import eu.eidas.engine.exceptions.EIDASSAMLEngineException;
+import org.opensaml.saml2.metadata.EntityDescriptor;
+
+import javax.annotation.Nonnull;
+import java.util.Properties;
 
 /**
  * IdpMetadataFetcher
@@ -18,7 +17,7 @@ import eu.eidas.engine.exceptions.EIDASSAMLEngineException;
  */
 public final class IdpMetadataFetcher extends DefaultMetadataFetcher {
 
-    private final Properties idpProperties = EIDASUtil.loadConfigs(Constants.IDP_PROPERTIES);
+    private final Properties idpProperties = new EnvironmentVariableSubstitutor().mutatePropertiesReplaceValues(EIDASUtil.loadConfigs(Constants.IDP_PROPERTIES));
 
     @Nonnull
     @Override

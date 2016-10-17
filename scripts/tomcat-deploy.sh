@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+project_root=$(dirname "$0")/..
+
+# ---------------------------
+# Tomcat setup
+# ---------------------------
+
 if hash catalina 2>/dev/null; then
   CATALINA_HOME=$(catalina  | grep CATALINA_HOME | awk '{ print $NF }')
   if [ ! -d "$CATALINA_HOME" ]; then
@@ -29,12 +35,45 @@ rm "$CATALINA_HOME/conf/catalina.properties%"
 
 # Extract from the binary zip file (under AdditionalFiles\endorsed)
 # the following libs to $TOMCAT_HOME\shared\lib:
-cp AdditionalFiles/endorsed/*.jar "$CATALINA_HOME/shared/lib"
 
-# Build and deploy the SP
-mvn --file EIDAS-SP clean package -P embedded -P coreDependencies
-cp EIDAS-SP/target/SP.war "$CATALINA_HOME/webapps"
+# TODO: consider making these jar files properly declared dependencies in pom.xml (if they're published to maven central)
+cp "$project_root"/AdditionalFiles/endorsed/*.jar "$CATALINA_HOME/shared/lib"
 
-# Restart Tomcat
-catalina stop
-catalina start
+# ---------------------------
+# Rebuild Everything
+# ---------------------------
+mvn --file EIDAS-Parent clean install -P embedded -P coreDependencies -Dmaven.test.skip=true
+
+# ---------------------------
+# Deploy the Service Provider
+# ---------------------------
+
+# Deploy the SP
+cp "$project_root"/EIDAS-SP/target/SP.war "$CATALINA_HOME/webapps"
+
+# ---------------------------
+# Deploy the Connector Node
+# ---------------------------
+
+export EIDAS_CONFIG_REPOSITORY="$project_root"/EIDAS-Config/
+
+# Deploy the Node
+cp "$project_root"/EIDAS-Node/target/EidasNode.war "$CATALINA_HOME/webapps"
+
+# ---------------------------
+# Deploy the IdP
+# ---------------------------
+
+# Deploy the IdP
+cp "$project_root"/EIDAS-IdP-1.0/target/IdP.war "$CATALINA_HOME/webapps"
+
+export EIDAS_KEYSTORE='keystore/eidasKeystore.jks'
+export EIDAS_HOST='http://127.0.0.1:8080'
+export IDP_URL='http://127.0.0.1:8080'
+export IDP_SSO_URL='https://127.0.0.1:8080'
+
+# ---------------------------
+# Start Tomcat
+# ---------------------------
+
+catalina run

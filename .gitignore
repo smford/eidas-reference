@@ -6,5 +6,5 @@
 */target
 
 # Log files
-*.log
-*/*.log
+*.log*
+*/*.log*
