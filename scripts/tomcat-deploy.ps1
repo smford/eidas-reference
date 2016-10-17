@@ -60,8 +60,6 @@ Copy-Item "$project_root/EIDAS-SP/target/SP.war" "$env:CATALINA_HOME\webapps"
 # Deploy the Connector Node
 # ---------------------------
 
-$env:EIDAS_CONFIG_REPOSITORY="$project_root/EIDAS-Config/"
-
 # Deploy the Node
 Copy-Item "$project_root/EIDAS-Node/target/EidasNode.war" "$env:CATALINA_HOME\webapps"
 
@@ -81,6 +79,7 @@ $env:EIDAS_KEYSTORE="keystore/eidasKeystore.jks"
 $env:EIDAS_HOST="http://127.0.0.1:8080"
 $env:IDP_URL="http://127.0.0.1:8080"
 $env:IDP_SSO_URL="https://127.0.0.1:8080"
+$env:EIDAS_CONFIG_REPOSITORY="$project_root/EIDAS-Config/"
 
 # Start Tomcat
 Invoke-Expression "$env:CATALINA_HOME\bin\startup.bat"
