@@ -18,27 +18,6 @@ else
   exit 1
 fi
 
-# 2.2.1. Configuring Tomcat 7/Tomcat 8
-# 1. Create a folder named endorsed in $TOMCAT_HOME.
-# 2. Create a folder named shared in $TOMCAT_HOME.
-mkdir -p "$CATALINA_HOME"/{endorsed,shared/lib}
-
-# 3. Edit the file $TOMCAT_HOME\conf\catalina.properties
-# and change the property shared.loader so that it reads:
-# shared.loader=${catalina.home}\shared\lib\*.jar.
-# Note that for Linux OS it should be
-# shared.loader=${catalina.home}/shared/lib/*.jar.
-
-# shellcheck disable=SC2016
-sed -i % 's|shared.loader=.*|shared.loader=${catalina.home}/shared/lib/*.jar|' "$CATALINA_HOME/conf/catalina.properties"
-rm "$CATALINA_HOME/conf/catalina.properties%"
-
-# Extract from the binary zip file (under AdditionalFiles\endorsed)
-# the following libs to $TOMCAT_HOME\shared\lib:
-
-# TODO: consider making these jar files properly declared dependencies in pom.xml (if they're published to maven central)
-cp "$project_root"/AdditionalFiles/endorsed/*.jar "$CATALINA_HOME/shared/lib"
-
 # ---------------------------
 # Rebuild Everything
 # ---------------------------
@@ -55,8 +34,6 @@ cp "$project_root"/EIDAS-SP/target/SP.war "$CATALINA_HOME/webapps"
 # Deploy the Connector Node
 # ---------------------------
 
-export EIDAS_CONFIG_REPOSITORY="$project_root"/EIDAS-Config/
-
 # Deploy the Node
 cp "$project_root"/EIDAS-Node/target/EidasNode.war "$CATALINA_HOME/webapps"
 
@@ -67,6 +44,7 @@ cp "$project_root"/EIDAS-Node/target/EidasNode.war "$CATALINA_HOME/webapps"
 # Deploy the IdP
 cp "$project_root"/EIDAS-IdP-1.0/target/IdP.war "$CATALINA_HOME/webapps"
 
+export EIDAS_CONFIG_REPOSITORY="$project_root"/EIDAS-Config/
 export EIDAS_KEYSTORE='keystore/eidasKeystore.jks'
 export EIDAS_HOST='http://127.0.0.1:8080'
 export IDP_URL='http://127.0.0.1:8080'
