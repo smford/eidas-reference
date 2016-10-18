@@ -5,7 +5,7 @@ applications:
 
 env:
   EIDAS_CONFIG_REPOSITORY: WEB-INF/
-  EIDAS_KEYSTORE: keystore/eidasKeystore.jks
+  EIDAS_KEYSTORE: WEB-INF/eidasKeystore.jks
   EIDAS_HOST: http://127.0.0.1:8080
   IDP_URL: http://127.0.0.1:8080
   IDP_SSO_URL: https://127.0.0.1:8080

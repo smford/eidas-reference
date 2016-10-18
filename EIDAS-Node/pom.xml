@@ -194,12 +194,19 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
                   <webResources>
-                    <resource>
-                      <directory>${project.basedir}/../EIDAS-Config</directory>
-                      <includes>
-                        <include>*</include>
-                      </includes>
-                    </resource>
+                      <resource>
+                          <directory>${project.basedir}/../EIDAS-Config</directory>
+                          <includes>
+                              <include>*</include>
+                          </includes>
+                      </resource>
+                      <resource>
+                          <directory>${project.basedir}/../keystore</directory>
+                          <targetPath>WEB-INF</targetPath>
+                          <includes>
+                              <include>*.jks</include>
+                          </includes>
+                      </resource>
                   </webResources>
                 </configuration>
             </plugin>
