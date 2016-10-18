@@ -32,6 +32,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import eu.eidas.config.impl.EnvironmentVariableSubstitutor;
 import org.opensaml.saml2.core.Response;
 import org.opensaml.xml.XMLObject;
 import org.slf4j.Logger;
@@ -63,7 +64,7 @@ public class SPUtil {
 
     public static Properties loadSPConfigs() throws ApplicationSpecificServiceException {
         try {
-            return SPUtil.loadConfigs(Constants.SP_PROPERTIES);
+            return new EnvironmentVariableSubstitutor().mutatePropertiesReplaceValues(SPUtil.loadConfigs(Constants.SP_PROPERTIES));
         } catch (IOException e) {
             LOG.error(e.getMessage());
             throw new ApplicationSpecificServiceException("Could not load configuration file", e.getMessage());
